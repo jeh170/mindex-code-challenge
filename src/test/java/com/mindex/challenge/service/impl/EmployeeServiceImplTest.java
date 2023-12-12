@@ -1,10 +1,13 @@
 package com.mindex.challenge.service.impl;
 
+import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -15,8 +18,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -33,6 +38,9 @@ public class EmployeeServiceImplTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Mock
+    private EmployeeRepository mockEmployeeRepository;
 
     @Before
     public void setup() {
@@ -76,6 +84,30 @@ public class EmployeeServiceImplTest {
 
         assertEmployeeEquivalence(readEmployee, updatedEmployee);
     }
+
+//    @Test
+//    public void testReadAll() {
+//        Employee testEmployee1 = new Employee();
+//        testEmployee1.setFirstName("John");
+//        testEmployee1.setLastName("Doe");
+//        testEmployee1.setDepartment("Engineering");
+//        testEmployee1.setPosition("Developer");
+//
+//        Employee testEmployee2 = new Employee();
+//        testEmployee2.setFirstName("Jane");
+//        testEmployee2.setLastName("Doe");
+//        testEmployee2.setDepartment("Engineering");
+//        testEmployee2.setPosition("Manager");
+//
+//        List<Employee> listOfEmployees = Arrays.asList(testEmployee1, testEmployee2);
+//
+//        Mockito.when(mockEmployeeRepository.findAll()).thenReturn(listOfEmployees);
+//
+//        List<Employee> employees = employeeService.readAll();
+//
+//        assertEmployeeEquivalence(testEmployee1, employees.get(0));
+//        assertEmployeeEquivalence(testEmployee2, employees.get(1));
+//    }
 
     private static void assertEmployeeEquivalence(Employee expected, Employee actual) {
         assertEquals(expected.getFirstName(), actual.getFirstName());
