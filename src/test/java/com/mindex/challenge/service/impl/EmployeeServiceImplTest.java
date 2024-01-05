@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -18,10 +17,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static com.mindex.challenge.assertions.DataAssertions.assertEmployeeEquivalence;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -108,11 +106,4 @@ public class EmployeeServiceImplTest {
 //        assertEmployeeEquivalence(testEmployee1, employees.get(0));
 //        assertEmployeeEquivalence(testEmployee2, employees.get(1));
 //    }
-
-    private static void assertEmployeeEquivalence(Employee expected, Employee actual) {
-        assertEquals(expected.getFirstName(), actual.getFirstName());
-        assertEquals(expected.getLastName(), actual.getLastName());
-        assertEquals(expected.getDepartment(), actual.getDepartment());
-        assertEquals(expected.getPosition(), actual.getPosition());
-    }
 }
